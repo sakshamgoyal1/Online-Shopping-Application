@@ -1,4 +1,4 @@
-package in.codevita.customerapi.domain;
+package in.codevita.onlineshoppingapi.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
