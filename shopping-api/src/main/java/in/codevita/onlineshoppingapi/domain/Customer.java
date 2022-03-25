@@ -1,9 +1,12 @@
 package in.codevita.onlineshoppingapi.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Customer {
@@ -11,10 +14,15 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long customerId;
+    @NotBlank(message="Please Enter Your First Name!!")
 	private String firstName;
+    @NotBlank(message = "Please Enter Your Last Name!!")
 	private String lastName;
+    @NotBlank(message = "Please Enter Your Mobile Number!!")
+    @Size(min = 10, max=10, message = "Please Enter Correct Mobile Number")
 	private String mobileNumber;
-
+    @NotBlank(message = "Please Enter Your Email Id!!")
+    @Column(updatable = false, unique = true)
 	private String email;
 	public Customer() {
 		super();
@@ -53,7 +61,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", firstName="  + firstName + ", lastName=" + lastName
+		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", mobileNumber=" + mobileNumber + ", email=" + email + "]";
 	}
 
