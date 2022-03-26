@@ -1,10 +1,12 @@
-	package in.codevita.onlineshoppingapi.serviceImpl;
+package in.codevita.onlineshoppingapi.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import in.codevita.onlineshoppingapi.domain.Address;
 import in.codevita.onlineshoppingapi.domain.Customer;
 import in.codevita.onlineshoppingapi.exception.CustomerIdException;
+import in.codevita.onlineshoppingapi.repository.AddressRepository;
 import in.codevita.onlineshoppingapi.repository.CustomerRepository;
 import in.codevita.onlineshoppingapi.service.CustomerService;
 
@@ -14,10 +16,25 @@ public class CustomerServiceImpl implements CustomerService{
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	@Autowired
+	private AddressRepository addressRespository;
+	
 	@Override
 	public Customer saveorUpdate(Customer customer) {
 	
 	try {
+		if(customer.getCustomerId()==null)
+		{
+			Address address=new Address();
+			customer.setAddress(address);
+			address.setCustomer(customer);
+			address.setEmail(customer.getEmail());
+		}
+		if(customer.getCustomerId()!=null)
+		{
+			customer.setAddress(addressRespository.findByEmail(customer.getEmail()));
+		}
+		
 		return customerRepository.save(customer);
 	}
 	catch (Exception e) {
@@ -51,4 +68,3 @@ public class CustomerServiceImpl implements CustomerService{
 		customerRepository.delete(customer);
 	}
 }
-
