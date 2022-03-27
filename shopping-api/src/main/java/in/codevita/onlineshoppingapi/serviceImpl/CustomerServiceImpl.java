@@ -15,9 +15,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Autowired
 	private CustomerRepository customerRepository;
-	
-//	@Autowired
-//	private AddressRepository addressRespository;
+
 	
 	@Override
 	public Customer saveorUpdate(Customer customer) {
@@ -31,11 +29,11 @@ public class CustomerServiceImpl implements CustomerService{
   }
 
 	@Override
-	public Customer findCustomerByEmailId(String emailId) {
-		Customer customer= customerRepository.findByEmail(emailId);
+	public Customer findCustomerByMobileNumber(String mobileNumber) {
+		Customer customer= customerRepository.findByMobileNumber(mobileNumber);
 		if(customer==null)
 		{
-			throw new CustomerIdException("Customer Email: "+emailId+" does not exist");
+			throw new CustomerIdException("Customer Mobile Number: "+mobileNumber+" does not exist");
 		}
 		return customer;
 	}
@@ -47,11 +45,11 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public void deleteCustomerByCustomerEmailId(String emailId) {
-		Customer customer= customerRepository.findByEmail(emailId);
+	public void deleteCustomerByCustomerMobileNumber(String mobileNumber) {
+		Customer customer= customerRepository.findByMobileNumber(mobileNumber);
 		if(customer==null)
 		{
-			throw new CustomerIdException("Customer Email: "+emailId+" does not exist");
+			throw new CustomerIdException("Customer Mobile Number: "+mobileNumber+" does not exist");
 		}
 		customerRepository.delete(customer);
 	}
