@@ -8,7 +8,7 @@ import in.codevita.onlineshoppingapi.domain.Customer;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long>{
 
-	Customer findByEmail(String email);
+	Customer findByMobileNumber(String mobileNumber);
 	
 
 	Iterable<Customer> findAll();
