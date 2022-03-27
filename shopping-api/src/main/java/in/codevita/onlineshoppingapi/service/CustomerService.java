@@ -6,10 +6,9 @@ public interface CustomerService {
 
 	public Customer saveorUpdate(Customer customer);
 	
-	public Customer findCustomerByEmailId(String emailId);
+	public Customer findCustomerByMobileNumber(String mobileNumber);
 	
 	public Iterable<Customer> finaAllCustomer();
 	
-	public void deleteCustomerByCustomerEmailId(String emailId);
+	public void deleteCustomerByCustomerMobileNumber(String mobileNumber);
 }
-	
