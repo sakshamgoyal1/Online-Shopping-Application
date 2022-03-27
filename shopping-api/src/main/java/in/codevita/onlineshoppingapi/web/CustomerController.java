@@ -37,10 +37,10 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(savedCustomer,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/{emailId}")
-	public ResponseEntity<?> getCustomerByEmailId(@PathVariable String emailId)
+	@GetMapping("/{mobileNumber}")
+	public ResponseEntity<?> getCustomerByEmailId(@PathVariable String mobileNumber)
 	{
-		Customer customer=customerService.findCustomerByEmailId(emailId);
+		Customer customer=customerService.findCustomerByMobileNumber(mobileNumber);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 	
@@ -50,10 +50,10 @@ public class CustomerController {
 		return customerService.finaAllCustomer();
 	}
 	
-	@DeleteMapping("/{emailId}")
-	public ResponseEntity<?> deleteCustomer(@PathVariable String emailId)
+	@DeleteMapping("/{mobileNumber}")
+	public ResponseEntity<?> deleteCustomer(@PathVariable String mobileNumber)
 	{
-		customerService.deleteCustomerByCustomerEmailId(emailId);
-		return new ResponseEntity<String>("Customer with Email Id :"+emailId+" deleted successfully",HttpStatus.OK);
+		customerService.deleteCustomerByCustomerMobileNumber(mobileNumber);
+		return new ResponseEntity<String>("Customer with Mobile Number :"+mobileNumber+" deleted successfully",HttpStatus.OK);
 	}
 }
