@@ -8,6 +8,6 @@ import in.codevita.onlineshoppingapi.domain.Address;
 @Repository
 public interface AddressRepository extends CrudRepository<Address, Long>{
 
-	Address findByEmail(String email);
+
 	
 }
