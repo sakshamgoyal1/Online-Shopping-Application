@@ -2,12 +2,15 @@ package in.codevita.onlineshoppingapi.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
@@ -15,8 +18,13 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long number;
+	@NotBlank(message = "firstName is required")
 	private String firstName;
-	private String secondName;
+	@NotBlank(message = "email is required")
+	@Column(updatable = false, unique = true)
+	private String email;
+	@NotBlank(message = "password is required")
+	@Size(min = 4, max = 12, message = "create password between 4 to 12 characters limit.")
 	private String password;
 	private Date start_date;
 	private Date end_date;
@@ -40,11 +48,11 @@ public class User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public String getSecondName() {
-		return secondName;
+	public String getemail() {
+		return email;
 	}
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
+	public void setemail(String secondName) {
+		this.email = secondName;
 	}
 	public String getPassword() {
 		return password;
