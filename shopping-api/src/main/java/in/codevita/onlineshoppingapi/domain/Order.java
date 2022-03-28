@@ -10,14 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "orders")
@@ -36,6 +33,11 @@ public class Order {
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(referencedColumnName = "customerId")
 	public Customer customer;
+
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "orderId")
+	private List<Product> products;
+	
 	private Date created_At;
 	private Date updated_At;
 	public Long getOrderId() {
@@ -93,4 +95,14 @@ public class Order {
 	public void setUpdated_At(Date updated_At) {
 		this.updated_At = updated_At;
 	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+
 }
