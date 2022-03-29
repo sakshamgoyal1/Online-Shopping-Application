@@ -1,9 +1,12 @@
 package in.codevita.onlineshoppingapi.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Product {
@@ -20,9 +23,14 @@ public class Product {
 	private String manufacturer;
 	private String quantity;
 	
+	
 	public Product() {
 		super();
 	}
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	private Category category;
+	
 	public Long getProductId() {
 		return productId;
 	}
@@ -70,6 +78,12 @@ public class Product {
 	}
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }
