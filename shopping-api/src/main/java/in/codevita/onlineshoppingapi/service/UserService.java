@@ -6,9 +6,9 @@ public interface UserService {
 
 public User saveorUpdate(User user);
 	
-	public User findUserByUserId(Long userId);
+	public User findUserByUserMobileNumber(String mobileNumber);
 	
 	public Iterable<User> finaAllUser();
 	
-	public void deleteUserByUserId(Long userId);
+	public void deleteUserByUserMobileNumber(String mobileNumber);
 }
