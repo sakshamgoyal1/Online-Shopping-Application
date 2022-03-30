@@ -18,4 +18,12 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 		CustomerIdExceptionResponse exceptionResponse=new CustomerIdExceptionResponse(ex.getMessage());
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler
+	public final ResponseEntity<Object> handleUserIdException(UserIdException ex, WebRequest request)
+	{
+		UserIdExceptionResponse exceptionResponse=new UserIdExceptionResponse(ex.getMessage());
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+	
 }
