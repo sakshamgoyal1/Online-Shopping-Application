@@ -8,5 +8,5 @@ import in.codevita.onlineshoppingapi.domain.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long>{
 
-	User findByUserId(Long userId);
+	User findByMobileNumber(String mobileNumber);
 }
