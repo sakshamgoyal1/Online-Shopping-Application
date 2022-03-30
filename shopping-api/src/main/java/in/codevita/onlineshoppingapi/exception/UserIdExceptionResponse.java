@@ -1,24 +1,20 @@
 package in.codevita.onlineshoppingapi.exception;
 
 public class UserIdExceptionResponse {
-	
-	private String email;
 
-	public UserIdExceptionResponse(String email) {
-		// TODO Auto-generated constructor stub
-		
+	private String mobileNumber;
+
+	public UserIdExceptionResponse(String mobileNumber)
+	{
 		super();
-		this.email = email;
+		this.mobileNumber = mobileNumber;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
-	
-	
-
 }
