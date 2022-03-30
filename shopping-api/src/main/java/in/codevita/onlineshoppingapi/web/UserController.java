@@ -19,7 +19,7 @@ import in.codevita.onlineshoppingapi.service.MapValidationErrorService;
 import in.codevita.onlineshoppingapi.service.UserService;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
 	@Autowired
