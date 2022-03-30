@@ -4,14 +4,11 @@ import in.codevita.onlineshoppingapi.domain.User;
 
 public interface UserService {
 
-	public User saveOrUpdate(User user);
+public User saveorUpdate(User user);
 	
-	public User findUserByEmail(String projectId);
+	public User findUserByUserId(Long userId);
 	
-	public Iterable<User> FindAllUser();
+	public Iterable<User> finaAllUser();
 	
-	public void deleteUserByEmail(String projectId);
-	
-
-	
+	public void deleteUserByUserId(Long userId);
 }
