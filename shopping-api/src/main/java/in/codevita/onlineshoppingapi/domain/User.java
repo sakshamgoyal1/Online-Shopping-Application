@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.aspectj.weaver.ast.Or;
 import org.hibernate.type.TrueFalseType;
@@ -31,8 +33,10 @@ public class User {
 	private Long userId;
 	@NotBlank(message = "Please enter your password")
 	private String password;
-//	@JoinColumn(unique = true, updatable = false)
-//	private String mobileNumber;
+	@NotBlank(message = "Please enter mobile number")
+	 @Size(min = 10, max=10, message = "Please Enter Correct Mobile Number")
+	    @Column(updatable = false, unique = true)
+	private String mobileNumber;
 	@JsonFormat(pattern="yyy-MM-dd")
 	private Date created_At;
 	@JsonFormat(pattern="yyy-MM-dd")
@@ -91,12 +95,12 @@ public class User {
 		this.customer = customer;
 	}
 
-//	public String getMobileNumber() {
-//		return mobileNumber;
-//	}
-//
-//	public void setMobileNumber(String mobileNumber) {
-//		this.mobileNumber = mobileNumber;
-//	}
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
 
 }
