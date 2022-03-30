@@ -37,10 +37,10 @@ public class UserController {
 		return new ResponseEntity<User>(saveUser,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/{userId}")
-	public ResponseEntity<?> getUserById(@PathVariable Long userId)
+	@GetMapping("/{mobileNumber}")
+	public ResponseEntity<?> getUserById(@PathVariable String mobileNumber)
 	{
-		User user=userService.findUserByUserId(userId);
+		User user=userService.findUserByUserMobileNumber(mobileNumber);
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	
@@ -50,10 +50,10 @@ public class UserController {
 		return userService.finaAllUser();
 	}
 	
-	@DeleteMapping("/{userId}")
-	public ResponseEntity<?> deleteOrder(@PathVariable Long userId)
+	@DeleteMapping("/{mobileNumber}")
+	public ResponseEntity<?> deleteOrder(@PathVariable String mobileNumber)
 	{
-		userService.deleteUserByUserId(userId);
-		return new ResponseEntity<String>("User :"+userId+" deleted successfully",HttpStatus.OK);
+		userService.deleteUserByUserMobileNumber(mobileNumber);
+		return new ResponseEntity<String>("User :"+mobileNumber+" deleted successfully",HttpStatus.OK);
 	}
 }
