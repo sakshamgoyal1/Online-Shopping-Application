@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import in.codevita.onlineshoppingapi.domain.User;
 import in.codevita.onlineshoppingapi.service.MapValidationErrorService;
 import in.codevita.onlineshoppingapi.service.UserService;
+
 @RestController
-@RequestMapping("/api/users")
-public class UserController{
-	
+@RequestMapping("/api/user")
+public class UserController {
+
 	@Autowired
 	private UserService userService;
 	
@@ -28,31 +29,31 @@ public class UserController{
 	private MapValidationErrorService mapValidationErrorService;
 	
 	@PostMapping("")
-	public ResponseEntity<?> createNewUser(@Valid @RequestBody User user, BindingResult result) {
-		ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationError(result);
+	public ResponseEntity<?> createNewUser(@Valid @RequestBody User user, BindingResult result)
+	{
+		ResponseEntity<?> errorMap= mapValidationErrorService.mapValidationError(result);
 		if(errorMap!=null) return errorMap;
-		User savedUser = userService.saveOrUpdate(user);
-		return new ResponseEntity<User>(savedUser,HttpStatus.CREATED);
+		User saveUser= userService.saveorUpdate(user);
+		return new ResponseEntity<User>(saveUser,HttpStatus.CREATED);
 	}
 	
-		@GetMapping("/{projectId}")
-		public ResponseEntity<?> getUserById(@PathVariable String projectId) {
-		User user = userService.findUserByEmail(projectId);
+	@GetMapping("/{userId}")
+	public ResponseEntity<?> getUserById(@PathVariable Long userId)
+	{
+		User user=userService.findUserByUserId(userId);
 		return new ResponseEntity<User>(user,HttpStatus.OK);
+	}
 	
-		}
-		
-		@GetMapping("/all")
-		public Iterable<User> getAllUsers(){
-			return userService.FindAllUser();
-		}
-		@DeleteMapping("/{projectId}")
-		public ResponseEntity<?> deleteUser(@PathVariable String projectId){
-			
-			userService.deleteUserByEmail(projectId);
-			return new ResponseEntity<String>("User with Id:" +projectId.toUpperCase()+" deleted successfully!!",HttpStatus.OK);
-			
-			
-			
-		}
+	@GetMapping("/all")
+	public Iterable<User> getAllUsers()
+	{
+		return userService.finaAllUser();
+	}
+	
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<?> deleteOrder(@PathVariable Long userId)
+	{
+		userService.deleteUserByUserId(userId);
+		return new ResponseEntity<String>("User :"+userId+" deleted successfully",HttpStatus.OK);
+	}
 }
