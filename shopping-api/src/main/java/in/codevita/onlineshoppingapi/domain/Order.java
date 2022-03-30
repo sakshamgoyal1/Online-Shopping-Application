@@ -16,6 +16,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -23,37 +25,26 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long orderId;
-	public Date orderDate;
 	public String orderStatus;
-	
+	@JsonFormat(pattern="yyy-MM-dd")
+	private Date order_At;
+	@JsonFormat(pattern="yyy-MM-dd")
+	private Date updated_At;
 	public Order() {
 		super();
 	}
 	
-	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinColumn(referencedColumnName = "customerId")
-	public Customer customer;
-
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(referencedColumnName = "orderId")
 	private List<Product> products;
 	
-	private Date created_At;
-	private Date updated_At;
+	
 	public Long getOrderId() {
 		return orderId;
 	}
 
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
-	}
-
-	public Date getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
 	}
 
 	public String getOrderStatus() {
@@ -63,16 +54,10 @@ public class Order {
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}	
-	public Customer getCustomer() {
-		return customer;
-	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 	@PrePersist
-	public void onCreate() {
-		this.setCreated_At(new Date());
+	public void onOrder() {
+		this.setOrder_At(new Date());
 	}
 
 	@PreUpdate
@@ -80,13 +65,7 @@ public class Order {
 		this.setUpdated_At(new Date());
 	}
 
-	public Date getCreated_At() {
-		return created_At;
-	}
 
-	public void setCreated_At(Date created_At) {
-		this.created_At = created_At;
-	}
 
 	public Date getUpdated_At() {
 		return updated_At;
@@ -104,5 +83,11 @@ public class Order {
 		this.products = products;
 	}
 
+	public Date getOrder_At() {
+		return order_At;
+	}
 
+	public void setOrder_At(Date order_At) {
+		this.order_At = order_At;
+	}
 }
