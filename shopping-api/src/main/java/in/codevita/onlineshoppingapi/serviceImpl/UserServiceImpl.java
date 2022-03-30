@@ -16,13 +16,22 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User saveorUpdate(User user) {
+		try {
 		return userRepository.save(user);
+		}
+		catch (Exception e) {
+			throw new UserIdException("User with number "+user.getMobileNumber()+"already exist");
+		}
 		
 	}
 
 	@Override
-	public User findUserByUserId(Long userId) {
-		User user=userRepository.findByUserId(userId);
+	public User findUserByUserMobileNumber(String mobileNumber) {
+		User user=userRepository.findByMobileNumber(mobileNumber);
+		if(user==null)
+		{
+			throw new UserIdException("User mobile Number "+mobileNumber+" not exist");
+		}
 		return user;
 	}
 
@@ -32,8 +41,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void deleteUserByUserId(Long userId) {
-		User user=userRepository.findByUserId(userId);
+	public void deleteUserByUserMobileNumber(String mobileNumber) {
+		User user=userRepository.findByMobileNumber(mobileNumber);
+		if(user==null)
+		{
+			throw new UserIdException("User mobile Number "+mobileNumber+" not exist");
+		}
 		userRepository.delete(user);
 	}
 
