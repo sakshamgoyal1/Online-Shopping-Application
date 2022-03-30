@@ -1,4 +1,4 @@
-package in.codevita.onlineshoppingapi.serviceimpl;
+package in.codevita.onlineshoppingapi.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,47 +9,32 @@ import in.codevita.onlineshoppingapi.repository.UserRepository;
 import in.codevita.onlineshoppingapi.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService {
-	
+public class UserServiceImpl implements UserService{
+
 	@Autowired
 	private UserRepository userRepository;
 	
 	@Override
-	public User saveOrUpdate(User user) {
+	public User saveorUpdate(User user) {
+		return userRepository.save(user);
 		
-		try {
-			user.setemail(user.getemail().toUpperCase());
-			return userRepository.save(user);
-		}catch(Exception ex) {
-			throw new UserIdException("User Id: "+user.getemail().toUpperCase()+" already Exists");
 	}
-}
 
 	@Override
-	public User findUserByEmail(String projectId) {
-		// TODO Auto-generated method stub
-		User user =userRepository.findByEmail(projectId.toUpperCase());
-		if(user==null) {
-			throw new UserIdException("User ID: "+projectId.toUpperCase()+ " does not exists");
-		}
+	public User findUserByUserId(Long userId) {
+		User user=userRepository.findByUserId(userId);
 		return user;
 	}
-	
+
 	@Override
-	public Iterable<User> FindAllUser() {
+	public Iterable<User> finaAllUser() {
 		return userRepository.findAll();
 	}
 
 	@Override
-	public void deleteUserByEmail(String projectId) {
-		// TODO Auto-generated method stub
-		User user =userRepository.findByEmail(projectId.toUpperCase());
-		if(user==null) {
-			throw new UserIdException("User ID: "+projectId.toUpperCase()+ " does not exists");
-		}
-		
+	public void deleteUserByUserId(Long userId) {
+		User user=userRepository.findByUserId(userId);
 		userRepository.delete(user);
-		
 	}
-}
 
+}
