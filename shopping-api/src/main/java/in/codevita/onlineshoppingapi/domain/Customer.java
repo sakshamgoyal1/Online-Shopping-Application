@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -33,6 +34,8 @@ public class Customer {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
     
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Order order;
 
 	public Address getAddress() {
 		return address;
@@ -73,6 +76,12 @@ public class Customer {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 
